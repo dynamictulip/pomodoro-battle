@@ -11,9 +11,7 @@ export default function App() {
   return (
     <div className='container-fluid override-font nes-container h-100'>
       <div className="row h-75">
-        <div className="col">
-          <TaskBoard />
-        </div>
+        <TaskBoard />
       </div>
       <div className="row h-25">
         <div className="col">
