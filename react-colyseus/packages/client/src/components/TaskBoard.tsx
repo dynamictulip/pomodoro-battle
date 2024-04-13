@@ -4,7 +4,7 @@ import { Task } from './Tasks/Task';
 
 export function TaskBoard() {
     return (
-        <div className="taskboard__container">
+        <div className="taskboard__container nes-container">
             <Task />
         </div>
     );
