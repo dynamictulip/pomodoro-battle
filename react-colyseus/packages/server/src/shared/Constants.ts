@@ -1,1 +1,1 @@
-export const GAME_NAME = 'game';
+export const GAME_NAME = 'pomodoro-battle';
