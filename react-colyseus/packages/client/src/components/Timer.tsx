@@ -1,8 +1,7 @@
 import * as React from 'react';
 import './Timer.css';
-import { useGameTime } from '../hooks/useGameTimer';
 import { useAuthenticatedContext } from '../hooks/useAuthenticatedContext';
-import { GameTime, TGameTimeOptions } from '../../../server/src/entities/GameTime';
+import { TGameTimeOptions } from '../../../server/src/entities/GameTime';
 
 export function Timer({ percentLeft, timerRunning }: TGameTimeOptions) {
 
@@ -10,9 +9,7 @@ export function Timer({ percentLeft, timerRunning }: TGameTimeOptions) {
 
     let cssClass = "";
     let progressValue = percentLeft
-    // if (progressValue > 80)
-    //     cssClass = "nes-progress"
-    // else 
+
     if (progressValue > 70)
         cssClass = "nes-progress is-primary"
     else if (progressValue > 30)
@@ -25,23 +22,6 @@ export function Timer({ percentLeft, timerRunning }: TGameTimeOptions) {
         cssClass = "nes-progress is-pattern"
         progressValue = 100
     }
-
-    // gameTime.listen('percentLeft', (current, previous) => {
-    //     progressValue = gameTime.percentLeft
-
-    //     if (progressValue > 70)
-    //         cssClass = "nes-progress is-primary"
-    //     else if (progressValue > 30)
-    //         cssClass = "nes-progress is-success"
-    //     else if (progressValue > 10)
-    //         cssClass = "nes-progress is-warning"
-    //     else if (progressValue > 0)
-    //         cssClass = "nes-progress is-error"
-    //     else {
-    //         cssClass = "nes-progress is-pattern"
-    //         progressValue = 100
-    //     }
-    // });
 
     const startTimer = () => {
         authenticatedContext.room.send("startTimer");

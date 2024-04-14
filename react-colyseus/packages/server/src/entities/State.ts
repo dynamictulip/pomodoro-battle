@@ -75,12 +75,6 @@ export class State extends Schema {
 
   }
 
-  /*** Timer functions ***/
-  // @type('number')
-  //  public percentLeft = 100;
-  //  @type('boolean')
-  // public timerRunning = false;
-
   maxTimeMilliseconds = 25 * 1000;
   delayed: Delayed | undefined;
 
