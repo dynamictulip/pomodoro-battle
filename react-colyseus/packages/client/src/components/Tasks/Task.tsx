@@ -5,7 +5,7 @@ import './Task.css';
 export function Task({ x, y, clickEventHandler }: { x: number, y: number, clickEventHandler: () => void }) {
     return (
         <i
-            className="nes-bulbasaur"
+            className="nes-bulbasaur nes-pointer"
             style={{ top: y, left: x }}
             onClick={clickEventHandler}></i >
     );
