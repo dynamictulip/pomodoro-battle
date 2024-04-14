@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Player } from './Player';
 import { usePlayers } from '../hooks/usePlayers';
 import './VoiceChannelActivity.css';
+import { Timer } from './Timer';
 
 export function VoiceChannelActivity() {
   const players = usePlayers();
@@ -14,6 +15,8 @@ export function VoiceChannelActivity() {
           <Player key={p.userId} {...p} />
         ))}
       </div>
+      <Timer />
+
     </div>
   );
 }
