@@ -18,7 +18,6 @@ export function TaskBoard() {
 
     return (
         <div className="taskboard__container nes-container h-100">
-            <p>{score}</p>
             <Task x={x} y={y} clickEventHandler={myOnClick} />
         </div>
     );
