@@ -20,6 +20,10 @@ export class StateHandlerRoom extends Room<State> {
     this.onMessage('updateScore', (client, _data) => {
       this.state.updateScore(client.sessionId, _data.score);
     });
+
+    this.onMessage('startTimer', (client, _data) => {
+      this.state.startTimer(this.clock);
+    });
   }
 
   onAuth(_client: any, _options: any, _req: any) {

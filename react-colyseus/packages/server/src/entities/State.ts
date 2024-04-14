@@ -1,5 +1,6 @@
 import { Schema, MapSchema, type } from '@colyseus/schema';
 import { TPlayerOptions, Player } from './Player';
+import { Clock, Delayed } from 'colyseus';
 
 export interface IState {
   roomName: string;
@@ -63,5 +64,48 @@ export class State extends Schema {
       player.score = newScore;
     }
 
+  }
+
+  /*** Timer functions ***/
+  @type('number')
+  public percentLeft = 100;
+  @type('boolean')
+  public timerRunning = false;
+
+  maxTimeMilliseconds = 25 * 1000;
+  delayed: Delayed | undefined;
+
+  startTimer(clock: Clock) {
+    this.timerRunning = true
+    this.percentLeft = 100
+
+    clock.clear();
+    clock.start();
+
+    console.log("Clock started")
+
+    this.delayed = clock.setInterval(this.updateTimer, 100, clock)
+  }
+
+  updateTimer = (clock: Clock) => {
+    if (!clock) {
+      console.log("No clock!")
+      return
+    }
+    const elapsed = clock.elapsedTime
+    //Has timer finished?
+    if (elapsed >= this.maxTimeMilliseconds) {
+      this.percentLeft = 0;
+      this.timerRunning = false;
+      this.delayed?.clear();
+      console.log("Stopped clock")
+      return;
+    }
+
+    //Update progress
+    this.percentLeft = 100 - (elapsed / this.maxTimeMilliseconds) * 100;
+
+    console.log("Updated to " + this.percentLeft)
+    this.delayed?.reset;
   }
 }
