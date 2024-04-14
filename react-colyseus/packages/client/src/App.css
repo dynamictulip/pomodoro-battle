@@ -18,11 +18,6 @@
     }
 
     .box-taskboard {
-        /* background-color: blue; */
         flex: 1;
-    }
-
-    .box-players {
-        /* background-color: red; */
     }
 }

@@ -15,7 +15,7 @@ export default function App() {
           <div className="box box-taskboard">
             <TaskBoard />
           </div>
-          <div className="box box-players">
+          <div className="box">
             <VoiceChannelActivity />
           </div>
         </PlayersContextProvider>
