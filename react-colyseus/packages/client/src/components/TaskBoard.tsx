@@ -13,9 +13,6 @@ export function TaskBoard() {
         //make smaller for first bulbasaur so it's definitely on screen!
         setWidth(clientWidth / 2);
         setHeight(clientHeight / 2);
-
-        // console.log('clientWidth: ' + clientWidth)
-        // console.log('clientHeight: ' + clientHeight)
     }, []);
 
     const leeway = 16
@@ -32,20 +29,16 @@ export function TaskBoard() {
 
     const authenticatedContext = useAuthenticatedContext();
 
-    const [score, setScore] = React.useState(0);
+    const [counter, setCounter] = React.useState(0);
     const myOnClick = () => {
-        setScore(s => s + 1);
-        authenticatedContext.room.send('updateScore', { score: score + 1 });
+        authenticatedContext.room.send('incrementScore');
+        setCounter(s => s + 1); //just to make it rerender
 
         //update size of play area
         const { clientHeight, clientWidth } = ref.current as HTMLDivElement;
         setWidth(clientWidth);
         setHeight(clientHeight);
-
-        // console.log('clientWidth: ' + clientWidth)
-        // console.log('clientHeight: ' + clientHeight)
     }
-
 
     return (
         <div className="taskboard__container nes-container" ref={ref}>

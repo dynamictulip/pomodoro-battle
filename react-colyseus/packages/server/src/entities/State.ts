@@ -62,7 +62,7 @@ export class State extends Schema {
     }
   }
 
-  updateScore(sessionId: string, newScore: number) {
+  incrementScore(sessionId: string) {
 
     //Score can't update when timer is not running
     if (!this.gameTime.timerRunning)
@@ -70,8 +70,16 @@ export class State extends Schema {
 
     const player = this._getPlayer(sessionId);
     if (player != null) {
-      player.score = newScore;
+      player.score += 1;
     }
+
+  }
+
+  resetScores(sessionId: string) {
+    this.players.forEach((player, key, map) => {
+      if (player.sessionId == sessionId)
+        player.score = 0
+    })
 
   }
 

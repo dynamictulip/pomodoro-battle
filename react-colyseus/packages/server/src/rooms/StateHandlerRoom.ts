@@ -17,8 +17,12 @@ export class StateHandlerRoom extends Room<State> {
       this.state.stopTalking(client.sessionId);
     });
 
-    this.onMessage('updateScore', (client, _data) => {
-      this.state.updateScore(client.sessionId, _data.score);
+    this.onMessage('incrementScore', (client, _data) => {
+      this.state.incrementScore(client.sessionId);
+    });
+
+    this.onMessage('resetScores', (client, _data) => {
+      this.state.resetScores(client.sessionId);
     });
 
     this.onMessage('startTimer', (client, _data) => {

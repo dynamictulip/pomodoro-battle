@@ -24,6 +24,7 @@ export function Timer({ percentLeft, timerRunning }: TGameTimeOptions) {
     }
 
     const startTimer = () => {
+        authenticatedContext.room.send("resetScores");
         authenticatedContext.room.send("startTimer");
     }
 
