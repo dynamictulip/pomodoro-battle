@@ -95,7 +95,7 @@ export class State extends Schema {
 
     console.log("Clock started")
 
-    this.delayed = clock.setInterval(this.updateTimer, 100, clock)
+    this.delayed = clock.setInterval(this.updateTimer, 50, clock)
   }
 
   updateTimer = (clock: Clock) => {
@@ -115,8 +115,6 @@ export class State extends Schema {
 
     //Update progress
     this.gameTime.percentLeft = 100 - (elapsed / this.maxTimeMilliseconds) * 100;
-
-    console.log("Updated to " + this.gameTime.percentLeft)
     this.delayed?.reset;
   }
 }
