@@ -10,11 +10,12 @@ export function TaskBoard() {
     const [height, setHeight] = React.useState(0);
     React.useEffect(() => {
         const { clientHeight, clientWidth } = ref.current as HTMLDivElement;
-        setWidth(clientWidth);
-        setHeight(clientHeight);
+        //make smaller for first bulbasaur so it's definitely on screen!
+        setWidth(clientWidth / 2);
+        setHeight(clientHeight / 2);
 
-        console.log('clientWidth: ' + clientWidth)
-        console.log('clientHeight: ' + clientHeight)
+        // console.log('clientWidth: ' + clientWidth)
+        // console.log('clientHeight: ' + clientHeight)
     }, []);
 
     const leeway = 16
@@ -41,8 +42,8 @@ export function TaskBoard() {
         setWidth(clientWidth);
         setHeight(clientHeight);
 
-        console.log('clientWidth: ' + clientWidth)
-        console.log('clientHeight: ' + clientHeight)
+        // console.log('clientWidth: ' + clientWidth)
+        // console.log('clientHeight: ' + clientHeight)
     }
 
 
