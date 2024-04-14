@@ -9,18 +9,14 @@ import { TaskBoard } from './components/TaskBoard';
 
 export default function App() {
   return (
-    <div className='container-fluid override-font nes-container h-100'>
+    <div className='container override-font nes-container'>
       <AuthenticatedContextProvider>
         <PlayersContextProvider>
-          <div className="row h-75">
-            <div className="col">
-              <TaskBoard />
-            </div>
+          <div className="box box-taskboard">
+            <TaskBoard />
           </div>
-          <div className="row h-25">
-            <div className="col">
-              <VoiceChannelActivity />
-            </div>
+          <div className="box box-players">
+            <VoiceChannelActivity />
           </div>
         </PlayersContextProvider>
       </AuthenticatedContextProvider>

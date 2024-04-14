@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@discord/embedded-app-sdk": "^1.1.2",
-    "bootstrap": "^5.3.3",
     "colyseus.js": "^0.14.13",
     "eslint": "^8.18.0",
     "eslint-plugin-react-hooks": "^4.6.0",
