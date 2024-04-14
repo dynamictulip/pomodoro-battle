@@ -1,6 +1,6 @@
-import {Room, Client} from 'colyseus';
-import {TPlayerOptions} from '../entities/Player';
-import {State, IState} from '../entities/State';
+import { Room, Client } from 'colyseus';
+import { TPlayerOptions } from '../entities/Player';
+import { State, IState } from '../entities/State';
 
 export class StateHandlerRoom extends Room<State> {
   maxClients = 1000;
@@ -15,6 +15,10 @@ export class StateHandlerRoom extends Room<State> {
 
     this.onMessage('stopTalking', (client, _data) => {
       this.state.stopTalking(client.sessionId);
+    });
+
+    this.onMessage('updateScore', (client, _data) => {
+      this.state.updateScore(client.sessionId, _data.score);
     });
   }
 

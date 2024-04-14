@@ -1,5 +1,5 @@
-import {Schema, MapSchema, type} from '@colyseus/schema';
-import {TPlayerOptions, Player} from './Player';
+import { Schema, MapSchema, type } from '@colyseus/schema';
+import { TPlayerOptions, Player } from './Player';
 
 export interface IState {
   roomName: string;
@@ -7,7 +7,7 @@ export interface IState {
 }
 
 export class State extends Schema {
-  @type({map: Player})
+  @type({ map: Player })
   players = new MapSchema<Player>();
 
   @type('string')
@@ -32,7 +32,7 @@ export class State extends Schema {
   createPlayer(sessionId: string, playerOptions: TPlayerOptions) {
     const existingPlayer = Array.from(this.players.values()).find((p) => p.sessionId === sessionId);
     if (existingPlayer == null) {
-      this.players.set(playerOptions.userId, new Player({...playerOptions, sessionId}));
+      this.players.set(playerOptions.userId, new Player({ ...playerOptions, sessionId }));
     }
   }
 
@@ -55,5 +55,13 @@ export class State extends Schema {
     if (player != null) {
       player.talking = false;
     }
+  }
+
+  updateScore(sessionId: string, newScore: number) {
+    const player = this._getPlayer(sessionId);
+    if (player != null) {
+      player.score = newScore;
+    }
+
   }
 }
