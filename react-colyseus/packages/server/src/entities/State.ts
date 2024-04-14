@@ -1,6 +1,7 @@
 import { Schema, MapSchema, type } from '@colyseus/schema';
 import { TPlayerOptions, Player } from './Player';
 import { Clock, Delayed } from 'colyseus';
+import { GameTime } from './GameTime';
 
 export interface IState {
   roomName: string;
@@ -10,6 +11,9 @@ export interface IState {
 export class State extends Schema {
   @type({ map: Player })
   players = new MapSchema<Player>();
+
+  @type(GameTime)
+  public gameTime = new GameTime({ percentLeft: 100, timerRunning: false });
 
   @type('string')
   public roomName: string;
@@ -59,6 +63,11 @@ export class State extends Schema {
   }
 
   updateScore(sessionId: string, newScore: number) {
+
+    //Score can't update when timer is not running
+    if (!this.gameTime.timerRunning)
+      return
+
     const player = this._getPlayer(sessionId);
     if (player != null) {
       player.score = newScore;
@@ -67,17 +76,17 @@ export class State extends Schema {
   }
 
   /*** Timer functions ***/
-  @type('number')
-  public percentLeft = 100;
-  @type('boolean')
-  public timerRunning = false;
+  // @type('number')
+  //  public percentLeft = 100;
+  //  @type('boolean')
+  // public timerRunning = false;
 
   maxTimeMilliseconds = 25 * 1000;
   delayed: Delayed | undefined;
 
   startTimer(clock: Clock) {
-    this.timerRunning = true
-    this.percentLeft = 100
+    this.gameTime.timerRunning = true
+    this.gameTime.percentLeft = 100
 
     clock.clear();
     clock.start();
@@ -95,17 +104,17 @@ export class State extends Schema {
     const elapsed = clock.elapsedTime
     //Has timer finished?
     if (elapsed >= this.maxTimeMilliseconds) {
-      this.percentLeft = 0;
-      this.timerRunning = false;
+      this.gameTime.percentLeft = 0;
+      this.gameTime.timerRunning = false;
       this.delayed?.clear();
       console.log("Stopped clock")
       return;
     }
 
     //Update progress
-    this.percentLeft = 100 - (elapsed / this.maxTimeMilliseconds) * 100;
+    this.gameTime.percentLeft = 100 - (elapsed / this.maxTimeMilliseconds) * 100;
 
-    console.log("Updated to " + this.percentLeft)
+    console.log("Updated to " + this.gameTime.percentLeft)
     this.delayed?.reset;
   }
 }

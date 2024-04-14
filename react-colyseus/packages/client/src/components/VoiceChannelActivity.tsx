@@ -3,9 +3,11 @@ import { Player } from './Player';
 import { usePlayers } from '../hooks/usePlayers';
 import './VoiceChannelActivity.css';
 import { Timer } from './Timer';
+import { useGameTime } from '../hooks/useGameTimer';
 
 export function VoiceChannelActivity() {
   const players = usePlayers();
+  const gameTime = useGameTime();
 
   return (
     <div className='nes-container is-dark with-title'>
@@ -15,7 +17,7 @@ export function VoiceChannelActivity() {
           <Player key={p.userId} {...p} />
         ))}
       </div>
-      <Timer />
+      <Timer {...gameTime} />
 
     </div>
   );
