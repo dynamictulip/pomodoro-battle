@@ -9,12 +9,10 @@ export function TaskBoard() {
     const [width, setWidth] = React.useState(0);
     const [height, setHeight] = React.useState(0);
     React.useEffect(() => {
-        const { offsetWidth, offsetHeight, clientHeight, clientWidth } = ref.current as HTMLDivElement;
-        setWidth(offsetWidth);
-        setHeight(offsetHeight);
+        const { clientHeight, clientWidth } = ref.current as HTMLDivElement;
+        setWidth(clientWidth);
+        setHeight(clientHeight);
 
-        console.log('offsetWidth: ' + offsetWidth)
-        console.log('offsetHeight: ' + offsetHeight)
         console.log('clientWidth: ' + clientWidth)
         console.log('clientHeight: ' + clientHeight)
     }, []);
@@ -37,6 +35,14 @@ export function TaskBoard() {
     const myOnClick = () => {
         setScore(s => s + 1);
         authenticatedContext.room.send('updateScore', { score: score + 1 });
+
+        //update size of play area
+        const { clientHeight, clientWidth } = ref.current as HTMLDivElement;
+        setWidth(clientWidth);
+        setHeight(clientHeight);
+
+        console.log('clientWidth: ' + clientWidth)
+        console.log('clientHeight: ' + clientHeight)
     }
 
 
